@@ -35,7 +35,7 @@ test_X = test_X / 255.0
 train_X = train_X.reshape((train_X.shape[0], 28, 28, 1))
 test_X = test_X.reshape((test_X.shape[0], 28, 28, 1))
 
-
+#Create model
 model = tf.keras.Sequential()
 model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)))
 model.add(MaxPooling2D((2, 2)))
@@ -43,10 +43,11 @@ model.add(Flatten())
 model.add(Dense(100, activation='relu'))
 model.add(Dense(10, activation='softmax'))
 
-# compile model
+#Compile model
 compile_model = model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 training = model.fit(train_X, train_Y, epochs = number_epochs)
 
+#Evaluate model
 val_loss, val_acc = model.evaluate(test_X, test_Y)
 print(val_loss, val_acc)
 
